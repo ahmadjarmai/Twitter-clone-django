@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}home{% endblock %}
+{% block content %}
+<div class="container">
+<div class="row">
+  <!-- sidebar items -->
+   <div class="col-md-3 d-none d-md-block">">
+        <ul class="list-group">
+          <li class="list-group-item"><i class="fa fa-home"></i> Home</li>
+          <li class="list-group-item"><i class="fa fa-user"></i> Profile</li>
+          <li class="list-group-item"><i class="fa fa-envelope"></i> Messages</li>
+          <li class="list-group-item"><i class="fa fa-bell"></i> Notifications</li>
+          <li class="list-group-item"><i class="fa fa-gear"></i> Settings</li>
+          <li class="list-group-item"><i class="fa fa-comment"></i> Comments</li>
+          <li class="list-group-item"><i class="fa fa-search"></i> Search</li>
+          <li class="list-group-item"><i class="fa fa-bookmark"></i> Bookmarks</li>
+        </ul>
+      </div>
+<!-- main content -->
+  <div class="col-md-8">
+    <div class="card my-3">
+      <div class="card-body p-0">
+        {% if tweets %}
+          {% for tweet in tweets %}
+            <div class="card mb-3">
+              <div class="card-body">
+
+                <div class="media">
+                  <a href="{% url 'profile' tweet.author.username %}">
+                  <img src="{{ tweet.author.profile.photo.url }}" class="mr-3 rounded-circle" alt="{{ tweet.author.username }}" width="50" height="50">
+                  </a>
+                  <div class="media-body">
+                    <p class="card-text">{{ tweet.content }}</p>
+                    <p class="card-text text-muted small">{{ tweet.author.username }} | {{ tweet.created_at }}</p>
+                    <div class="d-flex justify-content-between">
+                      <a href="{% url 'like' tweet.id %}" >
+                        <button type="button" class="btn text-primary like-Button" data-post-id="{{ tweet.id }}" data-action="{% if request.user in users_like %}un{% endif %}like"
+                        data-toggle="modal" data-target="#likeModal{{ tweet.id }}">
+                        <i class="fas fa-heart"></i> <span class="total">{{ tweet.users_like.count }}</span>
+                       </button>
+                      </a>
+                     <a href="{% url 'retweet' tweet.id %}">
+                       <button type="button" class="btn btn-link text-primary" data-toggle="modal" data-target="#retweetModal{{ tweet.id }}">
+                         <i class="fas fa-retweet"></i> {{ tweet.retweet_count }}
+                       </button>
+                     </a>
+                     <a href="{% url 'comment' tweet.id %}">
+                      <button type="button" class="btn btn-link text-primary" data-toggle="modal" data-target="#commentModal{{ tweet.id }}">
+                        <i class="fas fa-comment"></i> {{ tweet.comments.count }}
+                      </button>
+                     </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        {% else %}
+          <p>No tweets yet.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

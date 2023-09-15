@@ -1,0 +1,38 @@
+container-fluid {
+  max-width: 100%;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.col-sm-3 {
+  width: 25%;
+  padding: 0 20px;
+}
+
+.col-sm-9 {
+  width: 75%;
+  padding: 0 20px;
+}
+
+.rounded-circle {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+
+h2 {
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+p {
+  font-size: 18px;
+  margin-bottom: 20px;

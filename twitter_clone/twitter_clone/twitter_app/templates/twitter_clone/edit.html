@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load bootstrap5 %}
+{% block title %}Edit your account{% endblock %}
+{% block content %}
+ <h1>Edit your account</h1>
+ <p>You can edit your account using the following form:</p>
+ <form method="post" enctype="multipart/form-data">
+ {% bootstrap_form user_form layout='inline' %}
+ {% bootstrap_form profile_form layout='inline' %}
+ {% csrf_token %}
+ {% buttons %}
+   <button type="submit" class="btn btn-primary">
+     edit
+   </button>
+  {% endbuttons %}
+ </form>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block title %} comments {% endblock %}
+{% block content %}
+<div class="comment-form">
+  <form action="{% url 'comment' tweet.id %}" method="post">
+      {% bootstrap_form form  layout='inline' %}
+      {% csrf_token %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary">
+          Comment  
+        </button>
+      {% endbuttons %}
+  </form>
+</div>
+{% endblock %}

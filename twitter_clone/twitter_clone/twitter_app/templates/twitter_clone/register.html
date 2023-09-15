@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+{% block title %} Register {% endblock %}
+{% block content %}
+<div class="comment-form">
+  <form action="{% url 'register' %}" method="post">
+      {% bootstrap_form user_form  layout='inline' %}
+      {% csrf_token %}
+      {% buttons %}
+        <button type="submit" class="btn btn-primary">
+          Submit 
+        </button>
+      {% endbuttons %}
+  </form>
+</div>
+{% endblock %}

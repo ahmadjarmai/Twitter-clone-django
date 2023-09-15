@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+      <div class="row">
+        <div class="col-md-4 bg-info d-flex align-items-center justify-content-center" style="height: 300px;">
+          <div class="profile-img-circle">
+            <img src="{{ user.profile.photo.url }}" class="rounded-circle" width="150px" alt="Profile">
+          </div>
+        </div>
+        <div class="col-md-8">
+          <h1 class="display-4 mt-5">{{ user.username }}</h1>
+          <p>{{ user.profile.location }}</p>
+            {% if request.user != user %}
+                  {% if request.user not in user.followers.all %}
+                   <form action="{% url 'follow' user.id %}" method="post">
+                       {% csrf_token %}
+                       <button type="submit" class="btn btn-danger">Follow</button>
+                    </form>
+                     {% else %}
+                     <form action="{% url 'unfollow' user.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Unfollow</button>
+                     </form>
+                     {% endif %}
+           {% endif %}
+          <button class="btn btn-outline-primary btn-lg">Message</button>
+          </div>
+          <div class="border mt-3 p-3">
+            <p>{{ user.profile.bio }}</p>  
+          </div>
+          <span>Followers {{ user.followers.count }}</span>
+          <div>
+         </div>
+        </div>
+ {% endblock %}

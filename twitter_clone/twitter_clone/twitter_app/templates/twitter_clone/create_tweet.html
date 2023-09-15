@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap5 %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <form method="POST" action="{% url 'create_tweet' %}">
+      {% csrf_token %}
+      <div class="form-group">
+        <textarea class="form-control" name="content" rows="3" placeholder="What's happening?"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Tweet</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

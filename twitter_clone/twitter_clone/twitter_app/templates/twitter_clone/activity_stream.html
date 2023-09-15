@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Activity Stream</h1>
+  <ul>
+    {% for activity in activities %}
+      <li>
+        {{ activity.user.username }} {{ activity.verb }} {{ activity.content_type.model }} {{ activity.object_id }}
+        {% if activity.content_object %}
+           {{ activity.content_object }}
+        {% else %}
+          (deleted)
+        {% endif %}
+        at {{ activity.timestamp }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
